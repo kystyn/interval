@@ -3,19 +3,19 @@
 Воспользуемся критерием Баумана. Ясно, что для определения знаков всех крайних матриц достаточно найти наименьшее и наибольшее возможное значение точечного определителя матрицы $\mathbf{A}$:
 
 \begin{equation}
-det \mathbf{A} = (1 \pm \varepsilon) ^ 2 - (1.1 \pm \varepsilon)(1 \pm \varepsilon)
+\textrm{det} \mathbf{A} = (1 \pm \varepsilon) ^ 2 - (1.1 \pm \varepsilon)(1 \pm \varepsilon)
 \end{equation}
 
 Разность достигает \textbf{наибольшего} значения, когда уменьшаемое достигает \textbf{наибольшего} значения, а вычитаемое \textbf{наименьшего}.
 	
 \begin{equation} \label{maxdet}
-max det \mathbf{A} = \varepsilon ^2 + 4.1 \varepsilon - 0.1
+\textrm{max det} \mathbf{A} = \varepsilon ^2 + 4.1 \varepsilon - 0.1
 \end{equation}	
 
 Разность достигает \textbf{наименьшего} значения, когда уменьшаемое достигает  \textbf{наименьшего} значения, а вычитаемое \textbf{наибольшего}.
 
 \begin{equation}
-min det \mathbf{A} = - 2 \varepsilon ^2 - 2.1 \varepsilon - 0.1
+\textrm{min det} \mathbf{A} = - 2 \varepsilon ^2 - 2.1 \varepsilon - 0.1
 \end{equation}	
 
 Видно, что минимум строго отрицательный, а значит, нам необходимо определить из \ref{maxdet}, при каких $\varepsilon$ наибольший определитель имеет отрицательное значение.
@@ -51,6 +51,14 @@ min det \mathbf{A} = - 2 \varepsilon ^2 - 2.1 \varepsilon - 0.1
 	\end{center}
 \end{table}
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.7]{degenmat}
+		\label{pic:degenmat}
+		\caption{Зависимость параметра $\varepsilon$ от размерности матрицы}
+	\end{center}
+\end{figure}
+
 \begin{remark}
-	Результаты следует интерпретировать как: ``При $\varepsilon$ больших, чем в таблице, матрица является особенной''.
+	Результаты следует интерпретировать как: ``При $\varepsilon$ б\'{о}льших, чем в таблице, матрица является особенной''.
 \end{remark}
