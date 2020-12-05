@@ -1,0 +1,39 @@
+\subsection{Задача 1}
+Дана матрица 
+\begin{equation}
+A = 
+\begin{pmatrix}
+1 & 1\\
+1.1 & 1
+\end{pmatrix}
+\end{equation}
+
+Пусть теперь все элементы матрицы $a_{ij}$ имеют радиус $\varepsilon$:
+\begin{equation}
+rad \mathbf{a}_{ij} = \varepsilon
+\end{equation}
+
+Тогда
+\begin{equation}\label{task1}
+\mathbf{A} = 
+\begin{pmatrix}
+[1 - \varepsilon, 1 + \varepsilon] &  [1 - \varepsilon, 1 + \varepsilon] \\
+[1.1 - \varepsilon, 1.1 + \varepsilon] & [1 - \varepsilon, 1 + \varepsilon]
+\end{pmatrix}
+\end{equation}
+
+Требует определить, при каком радиусе $\varepsilon$ матрица \eqref{task1} содержит особенные матрицы.
+
+\subsection{Задача 2}
+Дана матрица
+\begin{equation}
+A = 
+\begin{pmatrix}\label{task2}
+1 & [0, \varepsilon] & \dots & [0, \varepsilon] \\
+[0, \varepsilon] & 1 & \dots & [0, \varepsilon] \\
+\vdots & \vdots & \vdots & \vdots \\
+[0, \varepsilon] & [0, \varepsilon] & \dots & 1
+\end{pmatrix}
+\end{equation}
+
+Требует определить, при каком радиусе $\varepsilon$ матрица \eqref{task2} содержит особенные матрицы.

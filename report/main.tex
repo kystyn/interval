@@ -1,0 +1,106 @@
+\documentclass[14pt,a4paper,article]{ncc}
+\usepackage[a4paper, mag=1000, left=2.5cm, right=1cm, top=2cm, bottom=2cm, headsep=0.7cm, footskip=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+%\usepackage[dvipsnames]{xcolor}
+\usepackage{amsfonts} 
+\usepackage{amsmath, etoolbox}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{style}
+\graphicspath{{figure/}}
+\DeclareGraphicsExtensions{.png,.jpg}
+
+%\bibliographystyle{gost-numeric.bbx}
+\usepackage{csquotes}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{literature.bib}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LE,RO]{\thepage}
+\fancyfoot{} 
+
+\usepackage{listings}
+
+\patchcmd\subequations
+{\theparentequation\alph{equation}}
+{\subequationsformat}
+{}{}
+
+\newcommand{\subequationsformat}{\theparentequation.\arabic{equation}}
+
+\numberwithin{equation}{subsection}
+
+%\makeatletter \@addtoreset{equation}{section} \makeatother 
+
+\usepackage[colorlinks]{hyperref}
+\hypersetup{linkcolor=black}
+
+\begin{document}
+
+% Title page 
+\begin{titlepage}
+    \begin{center}
+        \textsc{
+            Санкт-Петербургский политехнический университет имени Петра Великого \\[5mm]
+            Институт прикладной математики и механики\\[2mm]
+            Кафедра прикладной математики
+        }   
+        \vfill
+        \textbf{\large
+            Интервальный анализ\\
+            Отчёт по лабораторной работе №1 \\[3mm]
+        }                
+    \end{center}
+
+    \vfill
+    \hfill
+    \begin{minipage}{0.5\textwidth}
+        Выполнил: \\[2mm]   
+		Студент: Дамаскинский Константин \\
+		Группа: 3630102/70201\\
+    \end{minipage}
+
+	\hfill
+	\begin{minipage}{0.5\textwidth}
+		Принял: \\[2mm]
+		к. ф.-м. н., доцент \\   
+		Баженов Андрей Николаевич
+	\end{minipage}
+
+    \vfill
+    \begin{center}
+        \theyear\ г.
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+%\listoffigures
+\listoftables
+\newpage
+
+\section{Постановка задачи}
+%\input{problem_common.tex}
+\input{degenmat/problem.tex}
+
+\section{Теория}
+\input{degenmat/theory.tex}
+
+\input{impl.tex}
+
+\section{Результаты}
+\input{degenmat/results.tex}
+
+\section{Обсуждение}
+
+\input{degenmat/discuss.tex}
+
+\printbibliography
+\addcontentsline{toc}{section}{Литература}
+
+\input{app.tex}
+
+\end{document}
