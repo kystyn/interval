@@ -79,9 +79,19 @@ for i = 1 : length(WorkList_b)
     centers_y(i) = WorkList_b(i).Box(2).mid;
 end
 
-figure;
-plt4 = plot(centers_x, centers_y);
+xlist = [-10 : 0.1 : 10];
+ylist = [-10 : 0.1 : 10];
+
+[X, Y] = meshgrid(xlist, ylist);
+Z = booth2(X, Y);
+
+f4 = figure;
+contour(X, Y, Z, 30);
+hold on;
+
+plot(centers_x, centers_y);
+
 xlabel('x_c');
 ylabel('y_c');
 title('Booth: Centers trajectory');
-saveas(plt4, 'booth_traj', 'png'); 
+saveas(f4, 'booth_traj', 'png'); 
