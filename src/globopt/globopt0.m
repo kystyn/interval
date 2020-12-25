@@ -19,13 +19,13 @@ function [Z, WorkList, diams] = globopt0(ObjFunc, X)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
-  MaxStepNumber = 1000;  %   ограничение на количество итераций алгоритма 
+  MaxStepNumber = 100;  %   ограничение на количество итераций алгоритма 
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %   "обынтерваливаем", на всякий случай, введённые данные
 %  
-  X = intval(X);
+  X = infsup(X);
     
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  
@@ -75,7 +75,7 @@ while ( NStep <= MaxStepNumber )
     %   находим самую длинную компоненту ведущего бруса
     [radmax,imax] = max(rad(D1)); 
     
-    if radmax == 0
+    if radmax < 1e-6
         break
     end
 
@@ -91,8 +91,9 @@ while ( NStep <= MaxStepNumber )
     %   формируем записи-потомки Rec1 и Rec2 и помещаем их в рабочий список 
     Rec1 = struct( 'Box', D1, 'Estim', inf(Y1) );
     Rec2 = struct( 'Box', D2, 'Estim', inf(Y2) );
-    WorkList = [ WorkList  Rec1  Rec2 ];
-    diams = [diams diam(WorkList(Leading).Box(1)) + diam(WorkList(Leading).Box(2))];
+    WorkList(end + 1) = Rec1;
+    WorkList(end + 1) = Rec2;
+    diams(end + 1) = (wid(Rec2.Box(1)) ^ 2 + wid(Rec2.Box(2)) ^ 2) ^ 0.5;
     
     %   удаляем бывшую ведущую запись из рабочего списка
     WorkList(Leading) = [];  
