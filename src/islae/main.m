@@ -1,3 +1,5 @@
+pkg load interval;
+
 addpath('../../../../programs/IntLinInc2D');
 addpath('../../../../programs/IntLinInc3D');
 
@@ -30,8 +32,8 @@ disp(maxTol);
 disp('Cond = ');
 disp(cnd);
 EqnTol2D(infA, supA, infb, supb)
-%rectangle('Position', [argmaxTol(1) argmaxTol(2) 0.001 0.001 ],'EdgeColor','g');
-text(argmaxTol(1) + 0.01, argmaxTol(2), 'argmaxTol','FontSize',8);
+%rectangle('Position', [argmaxTol(1) argmaxTol(2) 0.001 0.001 ],'EdgeColor', 'b');
+%text(argmaxTol(1) + 0.01, argmaxTol(2), 'argmaxTol','FontSize',8);
 title('3 x 2');
 xlabel('x_1');
 ylabel('x_2');
