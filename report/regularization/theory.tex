@@ -1,0 +1,105 @@
+\subsection{Объединённое множество решений}
+
+Напомним, распознающий функционал имеет вид:
+
+\begin{equation}
+\textrm{Tol}(x, \mathbf{A}, \mathbf{b}) = \underset{1 \leq i \leq m}{\textrm{min}} \bigg \lbrace \textrm{rad} \mathbf{b}_i - \bigg| \textrm{mid} \mathbf{b}_i - \sum_{j=1}^{n} \mathbf{a}_{ij}x_j \bigg|  \bigg \rbrace
+\end{equation}
+
+Имеет место следующая теорема:
+
+\begin{theorem}
+	Пусть $x \in \mathbb{R}^n$. Тогда $x$ принадлежит допусковому множество тогда и только тогда, когда $\textrm{Tol}(x, \mathbf{A}, \mathbf{b}) \geq 0$.
+\end{theorem}
+
+Нетрудно заметить, что в случае неразрешимости интервальной системы одним из простейших способов коррекции системы будет расширение интервалов свободного столбца: повышая радиус интервала, мы увеличиваем значение распознающего функционала. Таким образом, можно увеличить интервал настолько, чтобы обеспечить неотрицательность функционала.
+
+\begin{equation*}
+\mathbf{b}=
+\begin{pmatrix}
+[\textrm{mid b}_1 - \textrm{rad b}_1, \textrm{mid b}_1 + \textrm{rad b}_1] \\
+[\textrm{mid b}_2 - \textrm{rad b}_2, \textrm{mid b}_2 + \textrm{rad b}_2] \\
+[\textrm{mid b}_3 - \textrm{rad b}_3, \textrm{mid b}_3 + \textrm{rad b}_3]
+\end{pmatrix}
+\rightarrow
+\end{equation*}
+\begin{equation*}
+\tilde{\mathbf{b}}=
+\begin{pmatrix}
+[\textrm{mid b}_1 - w_1 \textrm{rad b}_1, \textrm{mid b}_1 + w_1 \textrm{rad b}_1] \\
+[\textrm{mid b}_2 - w_2 \textrm{rad b}_2, \textrm{mid b}_2 + w_2 \textrm{rad b}_2] \\
+[\textrm{mid b}_3 - w_3 \textrm{rad b}_3, \textrm{mid b}_3 + w_3 \textrm{rad b}_3]
+\end{pmatrix}
+\end{equation*}
+
+При этом преследуется следующая цель: масштабирование интервала должно быть минимальным в определённом смысле.
+
+\subsection{Интервальная регуляризация}
+
+В этом разделе речь пойдёт о методе, который позволяет провести корректировку ИСЛАУ посредством решения задачи линейного программирования -- $l_1$-\textit{регуляризации} \cite{intv}.
+
+Минимизируется первая норма вектора 
+$w = 
+\begin{pmatrix}
+w_1 & w_2 & w_3
+\end{pmatrix}^T \in \mathbb{R}_+^3$: $\|w\|_1 \rightarrow \min$.
+
+Ясно, что при таком подходе нельзя строить задачу оптимизации с непосредственным использованием распознающего функционала ввиду его нелинейности. 
+
+Будем опираться на определение допускового множества решений напрямую: требуется, чтобы найденный вектор $x$ при действии на него оператором $A$ попал в интервал $\tilde{\mathbf{b}}$.
+
+Итак, требуется:
+\begin{equation}
+\begin{cases}
+	\exists x \in \mathbb{R}^3: A \cdot x \in \tilde{\mathbf{b}} \\
+	\|w\|_1 = w_1 + w_2 + w_3 \rightarrow \min
+\end{cases}
+\end{equation}
+
+Введём 
+$u=
+\begin{pmatrix}
+x \\ w
+\end{pmatrix}$.
+Тогда общий вид задачи ЛП перезаписывается следующим образом: 
+
+\begin{equation}
+\begin{cases}
+\begin{pmatrix}
+0 & 0 & 1 & 1 & 1
+\end{pmatrix} \cdot u \; (== \|w\|_1) \rightarrow \underset{u}{\min} \\
+u_{4,5,6} \geq 0 \\
+\begin{pmatrix}
+-A & -\textrm{diag}(\textrm{rad} \mathbf{b}) \\
+ A & -\textrm{diag}(\textrm{rad} \mathbf{b})
+\end{pmatrix}
+\cdot
+u
+\leq 
+\begin{pmatrix}
+-\textrm{mid} \mathbf{b} \\
+\textrm{mid} \mathbf{b}
+\end{pmatrix}
+\end{cases}
+\end{equation}
+
+\begin{remark}
+	Последнее уравнение эквивалентно:
+	\begin{equation*}
+	\begin{cases}
+		-Ax - \textrm{diag}(\textrm{rad} \mathbf{b}) w \leq -\textrm{mid} \mathbf{b} \\
+		Ax - \textrm{diag}(\textrm{rad} \mathbf{b}) w \leq \textrm{mid} \mathbf{b}
+	\end{cases}
+	\Longleftrightarrow 
+	\begin{cases}
+	\textrm{mid} \mathbf{b} - \textrm{diag}(\textrm{rad} \mathbf{b}) w \leq Ax\\
+	Ax \leq \textrm{mid} \mathbf{b} + \textrm{diag}(\textrm{rad} \mathbf{b}) w
+	\end{cases}
+		\Longleftrightarrow 
+	\end{equation*}
+	\begin{equation}
+	\inf \tilde{\mathbf{b}} \leq Ax \leq \sup \tilde{\mathbf{b}}
+	\end{equation}
+\end{remark}
+
+Данная задача ЛП успешно решается симплекс-методом. Программной реализацией на языке Python служит метод \texttt{linprog} пакета \texttt{scipy.optimize}.

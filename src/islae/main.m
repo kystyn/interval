@@ -32,8 +32,9 @@ disp(maxTol);
 disp('Cond = ');
 disp(cnd);
 EqnTol2D(infA, supA, infb, supb)
-%rectangle('Position', [argmaxTol(1) argmaxTol(2) 0.001 0.001 ],'EdgeColor', 'b');
-%text(argmaxTol(1) + 0.01, argmaxTol(2), 'argmaxTol','FontSize',8);
+rectangle('Position', [argmaxTol(1) - ive / 2, argmaxTol(2) - ive / 2, ive, ive], 'EdgeColor', 'b');
+rectangle('Position', [argmaxTol(1) - 0.003, argmaxTol(2) - 0.003, 0.006, 0.006], 'FaceColor', 'r');
+text(argmaxTol(1) + 0.01, argmaxTol(2) + 0.01, 'argmaxTol','FontSize', 10);
 title('3 x 2');
 xlabel('x_1');
 ylabel('x_2');
@@ -55,7 +56,10 @@ disp('Max tol = ');
 disp(maxTol);
 disp('Cond = ');
 disp(cnd);
-EqnTol3D(infA', supA', infb, supb, 1, 1)
+EqnTol3D(infA', supA', infb, supb, 1, 1);
+rectangle('Position', [argmaxTol(1) - ive / 2, argmaxTol(2) - ive / 2, ive, ive], 'EdgeColor', 'b');
+rectangle('Position', [argmaxTol(1) - 0.003, argmaxTol(2) - 0.003, 0.006, 0.006], 'FaceColor', 'r');
+text(argmaxTol(1) + 0.01, argmaxTol(2) + 0.01, 'argmaxTol','FontSize', 10);
 title('2 x 3');
 xlabel('x_1');
 ylabel('x_2');
