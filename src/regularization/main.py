@@ -41,5 +41,10 @@ sup_b += np.asarray([-tolmax[0]] * 3).reshape(3, 1)#res.x[-3:].reshape(3, 1)
 
 print("max Tol = ", tolmax, "argmax = ", argmax)
 
-xx = np.concatenate((argmax, np.asarray([0, -oldtolmax, 0]).reshape(3, 1)), axis=0)
+print(np.matmul(A, argmax) - inf_b, sup_b - np.matmul(A, argmax))
+
+xx = np.concatenate((argmax,
+                     np.asarray(
+                         [-oldtolmax / diag_rad_b[0, 0], -oldtolmax / diag_rad_b[1, 1], -oldtolmax / diag_rad_b[2, 2]]).
+                     reshape(3, 1)), axis=0)
 print("Cx - r = ", np.matmul(C, xx) - r)
