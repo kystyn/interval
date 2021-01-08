@@ -1,0 +1,36 @@
+\subsection{Задача 1}
+
+Требуется найти формальное решение ИСЛАУ с матрицей
+\begin{equation}
+    \mathbf{A}=
+    \begin{pmatrix}
+    [0.9, 1.1] & [0.9, 1.1] & [0.9, 1.1] \\
+    [0.9, 1.1] & [0.9, 1.1] & [0.0, 0.0] \\
+    [0.9, 1.1] & [0.0, 0.0] & [0.0, 0.0] 
+    \end{pmatrix}
+\end{equation}
+
+и правой частью, содержащей неправильные интервалы:
+
+\begin{equation}
+\mathbf{b}=
+\begin{pmatrix}
+[2.8, 3.2] \\
+[2.2, 1.8] \\
+[0.9, 1.1]
+\end{pmatrix}
+\end{equation}
+
+\subsection{Задача 2}
+
+Дана точечная матрица $A \in \mathbb{R}^{256 \times 36}$ и свободный столбец $b \in \mathbb{R}^{256}$.
+
+Требуется объинтервалить вектор $b$, получив $\mathbf{b} \in \mathbb{KR}^{256}$, такой что 
+\begin{equation}
+\mathbf{b}_k = [b_k - \varepsilon, b_k + \varepsilon]
+\end{equation}
+
+и найти такой $\mathbf{x} \in \mathbb{KR}^{36}$, что:
+\begin{equation}
+A\mathbf{x} \subset \mathbf{b}
+\end{equation}
