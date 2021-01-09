@@ -85,7 +85,7 @@ xx = F\xx;
 %//
 ni = 0;   r = Inf;   q = 1;
 
-while ( r/q>Eps & ni<IterLim )
+while ( r/q>Eps && ni<IterLim )
     r = 0;      
     ni = ni+1; 
     x = xx;

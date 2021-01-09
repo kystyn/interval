@@ -1,3 +1,3 @@
-function y = sti(x)
-  y = [-inf(x); sup(x)]
+function y = sti(xinf, xsup)
+  y = [-xinf, xsup]';
 endfunction
