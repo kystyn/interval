@@ -8,8 +8,8 @@ function lst = randlist( available_nums, needed )
   for i = 1 : 1 : needed
     num = 1 + mod(floor(randn() * 1000), length(available_nums));
     while (contains(lst, num, i - 1))
-      num = 1 + mod(floor(randn() * 1000), needed - 1);
+      num = 1 + mod(floor(randn() * 1000), length(available_nums));
     endwhile
-    lst(i) = available_nums(num);
+    lst(i) = num;
   endfor
 endfunction

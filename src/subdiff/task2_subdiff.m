@@ -1,5 +1,6 @@
-function task2(fname, row, column)
+function task2_subdiff(fname, row, column)
   A = load(fname, [row, column]);
+  rank(A)
   b_pt = load('bb.txt', [row, 1]);
   b_inf = zeros(1, length(b_pt));
   b_sup = b_inf;
@@ -18,7 +19,7 @@ function task2(fname, row, column)
   solution_sup = zeros(1, column);
   
   numit = 0;
-  while (numit < 3)%row - numit * column > 0)  
+  while (numit < 5)%row - numit * column > 0)  
     while (1)
       lst = randlist(available_nums, column); 
       A_choice = A(lst, :);
@@ -29,22 +30,30 @@ function task2(fname, row, column)
       b_choice_inf = b_inf(lst);
       b_choice_sup = b_sup(lst);
       
-      solinf = [];
-      solsup = [];
+      AA = zeros(column, column, 2);
+      AA(:,:,1) = AA(:,:,2) = A_choice;
+      bb = zeros(column, 2);
+
+      for i = 1 : 1 : column
+        bb(i, 1) = b_choice_inf(i);
+        bb(i, 2) = b_choice_sup(i);
+      endfor
       
-      [solinf, solsup] = exact(A_choice, b_choice_inf, b_choice_sup);
+      sol = [];
+      sol = subdiff(AA, bb);%exact(A_choice, b_choice_inf, b_choice_sup);
       
-      if (size(solinf, 2) == 1)
-        continue;
-      endif
+      %A(lst, :) = [];
+      %b_inf(lst) = [];
+      %b_sup(lst) = [];
+      %available_nums(lst) = [];
       
       for i = 1 : 1 : column
-        if (solution_inf(i) < solution_sup(i))
-          solution_inf(i) = max(solution_inf(i), solinf(i));
-          solution_sup(i) = min(solution_sup(i), solsup(i));
+        if solution_inf(i) < solution_sup(i)
+          solution_inf(i) = max(solution_inf(i), sol(i));
+          solution_sup(i) = min(solution_sup(i), sol(i + column));
         else
-          solution_inf(i) = min(solution_inf(i), solinf(i));
-          solution_sup(i) = max(solution_sup(i), solsup(i));
+          solution_inf(i) = min(solution_inf(i), sol(i));
+          solution_sup(i) = max(solution_sup(i), sol(i + column));
         endif
       endfor
       break;
@@ -57,12 +66,6 @@ function task2(fname, row, column)
   for i = 1 : 1 : column
     printf("%.3f %.3f\n", solution_inf(i), solution_sup(i));
   endfor
-  
-  xx = A * ki(solution_inf', solution_sup');
-  bb = ki(b_inf', b_sup');
-  for i = 1 : 1 : row
-    printf("[%.3f, %.3f]; [%.3f, %.3f]\n", 
-    inf(xx(i)), sup(xx(i)), 
-    inf(bb(i)), sup(bb(i)));
-  endfor
+
+  printf('Succeeded: %i\n', check(A, ki(solution_inf', solution_sup'), ki(b_inf, b_sup)));
 endfunction

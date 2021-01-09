@@ -1,3 +1,5 @@
+addpath("kinterval");
+
 % task 1
 A_inf = \
     [0.9, 0.9, 0.9;
@@ -18,4 +20,4 @@ disp('task 1: ')
 subdiff(A, b);
 
 %task 2
-task2('matrix_n_phi_1.txt', 256, 36);
+task2_subdiff('matrix_n_phi_1.txt', 256, 36);

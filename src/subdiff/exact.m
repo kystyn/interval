@@ -9,12 +9,12 @@ function [solinf, solsup] = exact( A, binf, bsup )
   endfor
   
   A_minus = A;
-  for y = 1 : 1 : size(A_plus)(1)
-    for x = 1 : 1 : size(A_plus)(2)
-      if (A_plus(y, x) > 0)
-        A_plus(y, x) = 0;
+  for y = 1 : 1 : size(A_minus)(1)
+    for x = 1 : 1 : size(A_minus)(2)
+      if (A_minus(y, x) > 0)
+        A_minus(y, x) = 0;
       else
-        A_plus(y, x) *= -1;
+        A_minus(y, x) *= -1;
       endif
     endfor
   endfor
