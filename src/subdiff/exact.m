@@ -1,4 +1,4 @@
-function [solinf, solsup] = exact( A, binf, bsup )
+function sol = exact( A, binf, bsup )
   A_plus = A;
   for y = 1 : 1 : size(A_plus)(1)
     for x = 1 : 1 : size(A_plus)(2)
@@ -23,4 +23,5 @@ function [solinf, solsup] = exact( A, binf, bsup )
   solinf = [];
   solsup = [];
   [solinf, solsup] = stiinv(A_block\sti(binf, bsup));
+  sol = [solinf, solsup]';
 endfunction
