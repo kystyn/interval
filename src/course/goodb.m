@@ -13,5 +13,5 @@ Eint = ki(E, E);
 A(:, :, 1) = inf(Aint);
 A(:, :, 2) = sup(Aint); 
 
-b = [[-3, 4]; [-1, 2]];
-subdiff(A, b, 0.1);
+b = [[-3, 3.002]; [-1, 2]];
+subdiff(A, b, 1);
