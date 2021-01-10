@@ -35,7 +35,7 @@ function task2_subdiff(fname, row, column)
   
   sol = [];
   
-  sol = exact(A * 40, b_inf * 40, b_sup * 40); %subdiff(AA * 40, bb * 40);
+  sol = exact(A * 40, b_inf, b_sup) * 40; %subdiff(AA * 40, bb * 40);
       
   % print solution
   solution_inf = sol(1:column);
@@ -62,7 +62,8 @@ function task2_subdiff(fname, row, column)
   plot(lst, xx(:, 2)', 'g');
   plot(lst, (xx(:, 1) + xx(:, 2))' / 2);
   plot(lst, x0, 'b');
-  legend('inf', 'sup', 'mid', 'original');
+  plot(lst, log(sum(As)), 'g*');
+  legend('inf', 'sup', 'mid', 'original', 'sum A');
   saveas(plt, 'graph', 'png');
   
   bbb = As * ki(xx(:, 1), xx(:, 2));
