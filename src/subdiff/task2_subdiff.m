@@ -50,6 +50,21 @@ function task2_subdiff(fname, row, column)
   
   disp('Ax: '); 
   xx = load('x.txt', [column, 2]);
+  
+  lst = zeros(1, 36);
+  for i = 1 : 1 : length(lst)
+    lst(i) = i;
+  endfor
+  
+  figure;
+  plt = plot(lst, xx(:, 1)', 'r');
+  hold on;
+  plot(lst, xx(:, 2)', 'g');
+  plot(lst, (xx(:, 1) + xx(:, 2))' / 2);
+  plot(lst, x0, 'b');
+  legend('inf', 'sup', 'mid', 'original');
+  saveas(plt, 'graph', 'png');
+  
   bbb = As * ki(xx(:, 1), xx(:, 2));
   F = fopen('Ax.txt', 'w');
   fprintf(F, "[%.3f, %.3f]\n", inf(bbb), sup(bbb));
