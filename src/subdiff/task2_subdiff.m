@@ -10,7 +10,7 @@ function task2_subdiff(fname, row, column)
   As = A;
   
   for i = 1 : 1 : length(b_pt)
-    eps = 50 * (mod(i, 7) + 1);%floor(randn() * 1e4) * 1e-4;
+    eps = 0.05 * (mod(i, 7) + 1);%floor(randn() * 1e4) * 1e-4;
     b_inf(i) = b_pt(i) - eps;
     b_sup(i) = b_pt(i) + eps;
   endfor
@@ -47,4 +47,12 @@ function task2_subdiff(fname, row, column)
   printf('Succeeded: %i\n', check(As, sol, bs));
   x0 = [0.0 0.25 0.5 0.5 0.25 0.0 0.25 0.5 0.75 0.75 0.5 0.25 0.5 0.75 1.0 1.0 0.75 0.5 0.5 0.75 1.0 1.0 0.75 0.5 0.25 0.5 0.75 0.75 0.5 0.25 0.0 0.25 0.5 0.5 0.25 0.0];
   printf('Succeded X: %i\n', checkx(x0, sol'));
+  
+  disp('Ax: '); 
+  xx = load('x.txt', [column, 2]);
+  bbb = As * ki(xx(:, 1), xx(:, 2));
+  F = fopen('Ax.txt', 'w');
+  fprintf(F, "[%.3f, %.3f]\n", inf(bbb), sup(bbb));
+  fclose(F);
+
 endfunction
